@@ -1,0 +1,127 @@
+<div class="searchClass">
+  <div class="example-flex-container">
+    <div class="example-button-container">
+      <button mat-fab extended (click)="goToRegister()">
+        <mat-icon>person_add</mat-icon>Add
+      </button>
+    </div>
+</div>
+  <input
+    matInput
+    type="search"
+    placeholder="Enter your choice..."
+    (keyup)="getSearchInputData($event)"
+  />
+
+  <mat-icon>search</mat-icon>
+</div>
+
+<div *ngIf="datasource && datasource.data.length === 0" class="no-data">
+  No data found!
+</div>
+
+<mat-card>
+  <table
+    mat-table
+    [dataSource]="datasource"
+    matSort
+    *ngIf="datasource && datasource.data.length > 0"
+    class="mat-elevation-z8"
+  >
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let emp">{{ emp.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Age</th>
+      <td mat-cell *matCellDef="let emp">
+        {{ emp.age}}
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+      <td mat-cell *matCellDef="let emp">{{ emp.gender }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+      <td mat-cell *matCellDef="let emp">
+        {{ emp.department }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="doj">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>DOJ</th>
+      <td mat-cell *matCellDef="let emp">
+        {{ emp.doj | date : "dd-MM-YYYY" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef>IsActive</th>
+      <td mat-cell *matCellDef="let emp">{{ emp.active }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" >
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let emp; let i = index">
+        <button
+          mat-icon-button
+          [style.color]="'black'"
+          [mat-menu-trigger-for]="menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <div class="navlink2">
+            <ul>
+              <li>
+                <button mat-button (click)="getStudentIdForUpdateData(i)">
+               <mat-icon>edit_square</mat-icon>   edit
+                </button>
+              </li>
+
+              <li>
+                <button mat-button (click)="getStudentIdForDeleteData(i)">
+                  <mat-icon>delete</mat-icon> delete
+                </button>
+              </li>
+
+              <li>
+                <button mat-button (click)="getStudentIdForShowingData(i + 1)">
+                  <mat-icon>visibility</mat-icon>  view 
+                </button>
+              </li>
+
+              <li>
+                <button mat-button (click)="goToDetailedComponent(i+1)">
+                  <mat-icon>more</mat-icon> more details 
+                </button>
+              </li>
+            </ul>
+          </div>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</mat-card>
+<!-- PAGINATOR -->
+<div class="paginator-wrapper">
+  <mat-paginator
+    *ngIf="datasource && datasource.data.length > 0"
+    [pageSizeOptions]="[10, 50, 100]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>

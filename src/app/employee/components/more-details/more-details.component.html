@@ -1,0 +1,50 @@
+<mat-tab-group dynamicHeight>
+  
+  <mat-tab label="Address">
+    <div class="example-box mat-elevation-z4">
+      <div class="cardDiv">
+        <mat-card class="form-card">
+          <div *ngIf="employee">
+            <br />
+            <mat-label>Address :</mat-label>
+            {{ employee.address }}
+            <hr />
+            <br />
+            <mat-label>State :</mat-label>
+            {{ employee.state }}
+            <hr />
+            <br />
+            <mat-label>city :</mat-label>
+            {{ employee.city }}
+            <hr />
+            <br />
+            <mat-label>Zip Code :</mat-label>
+            {{ employee.zipCode }}
+            <hr />
+            <br />
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
+      <mat-tab label="Contact">
+        <div class="example-box mat-elevation-z4">
+          <div class="cardDiv">
+            <mat-card class="form-card">
+              <div *ngIf="employee">
+                <br />
+                <mat-label>Phone Number :</mat-label>
+                {{ employee.phone }}
+                <hr />
+                <br />
+                <mat-label>Email :</mat-label>
+                {{ employee.email }}
+                <hr />
+                <br />
+                <br />
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab>
+</mat-tab-group>
